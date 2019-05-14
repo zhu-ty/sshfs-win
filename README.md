@@ -145,3 +145,37 @@ It also packages the following components:
 - Cygwin: LGPLv3
 - GLib2: LGPLv2
 - SSH: "all components are under a BSD licence, or a licence more free than that"
+
+
+## Build
+Install SSHFS-Win, WinFsp, and WIX Toolset.
+Versions that I used in this test:
+SSHFS-Win 3.2 BETA, WinFsp 2018.2 B2, WIX Toolset 3.11.
+
+Install cygwin
+Download from https://www.cygwin.com/setup-x86_64.exe
+Run installer and follow default settings
+
+Install development tools, minimum packages:
+gcc-g++,make,automake,patch,vim,git,libglib2.0-devel,cygport,meson.
+An simple way to do it is this:
+Copy setup-x86_64.exe to c:\cygwin64, then from a cygwin terminal run:
+$ /setup-x86_64.exe -q -B -P gcc-g++,make,automake,patch,vim,git,libglib2.0-devel,cygport,meson
+
+Install cygfuse by running:
+$ /cygdrive/c/Program\ Files\ (x86)/WinFsp/opt/cygfuse/install.sh
+
+Clone the sshfs-win repository
+$ git clone https://github.com/billziss-gh/sshfs-win.git
+
+Update the sshfs submodule
+Go to the sshfs-win project directory, then run:
+$ git submodule init
+
+$ git submodule update
+
+Run make in parallel mode
+$ make -j8
+
+An msi file installer will be saved in .build/x64/dist folder.
+It builds with some warnings that I coundn't get rid of, such as missing rst2man package.

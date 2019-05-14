@@ -83,6 +83,8 @@ static int do_svc(int argc, char *argv[])
     "-opassword_stdout",                \
     "-orellinks",                       \
     "-ofstypename=SSHFS",               \
+    "-oumask=022",                      \
+    "-ocreate_umask=022",               \
     "-oUserKnownHostsFile=/dev/null",   \
     "-oStrictHostKeyChecking=no"
 
@@ -177,7 +179,7 @@ static int do_svc(int argc, char *argv[])
             snprintf(idmap, sizeof idmap, "-ouid=%d,gid=%d", passwd->pw_uid, passwd->pw_gid);
     }
 
-    char *sshfs_argv[256] =
+    char *sshfs_argv[4096] =
     {
         sshfs, SSHFS_ARGS, idmap, volpfx, portopt, remote, argv[2], 0,
     };

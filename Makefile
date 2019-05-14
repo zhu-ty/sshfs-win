@@ -29,7 +29,7 @@ $(Status)/done: $(Status)/dist
 
 $(Status)/dist: $(Status)/wix
 	mkdir -p $(DistDir)
-	cp $(shell cygpath -aw $(WixDir)/sshfs-win-$(MyVersion)-$(MyArch).msi) $(DistDir)
+	cp $(shell cygpath -aw $(WixDir)/sshfs-win-SKBuild-$(MyVersion)-$(MyArch).msi) $(DistDir)
 	touch $(Status)/dist
 
 $(Status)/wix: $(Status)/sshfs-win
@@ -55,7 +55,7 @@ $(Status)/wix: $(Status)/sshfs-win
 		-o "$(shell cygpath -aw $(WixDir)/root.wixobj)"\
 		"$(shell cygpath -aw $(WixDir)/root.wxs)"
 	light -nologo\
-		-o $(shell cygpath -aw $(WixDir)/sshfs-win-$(MyVersion)-$(MyArch).msi)\
+		-o $(shell cygpath -aw $(WixDir)/sshfs-win-SKBuild-$(MyVersion)-$(MyArch).msi)\
 		-ext WixUIExtension\
 		-b $(RootDir)\
 		$(shell cygpath -aw $(WixDir)/root.wixobj)\
